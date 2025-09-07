@@ -1,0 +1,331 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+
+designed using localmaze gui creator - Enhanced by Claude
+]=]
+
+-- Services
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local CollectionService = game:GetService("CollectionService")
+local Players = game:GetService("Players")
+
+local G2L = {}
+
+-- Create ScreenGui
+G2L["ScreenGui_1"] = Instance.new("ScreenGui", Players.LocalPlayer:WaitForChild("PlayerGui"))
+G2L["ScreenGui_1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
+G2L["ScreenGui_1"]["Name"] = "DiscordInviteGui"
+
+-- Add tag
+CollectionService:AddTag(G2L["ScreenGui_1"], "main")
+
+-- Create main Frame
+G2L["Frame_2"] = Instance.new("Frame", G2L["ScreenGui_1"])
+G2L["Frame_2"]["BorderSizePixel"] = 0
+G2L["Frame_2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["Frame_2"]["Size"] = UDim2.new(0, 270, 0, 144)
+G2L["Frame_2"]["BackgroundTransparency"] = 0.19
+G2L["Frame_2"]["Name"] = "MainFrame"
+
+-- Add corner rounding
+local corner = Instance.new("UICorner", G2L["Frame_2"])
+corner.CornerRadius = UDim.new(0, 8)
+
+-- Add stroke for better visibility
+local stroke = Instance.new("UIStroke", G2L["Frame_2"])
+stroke.Color = Color3.fromRGB(195, 52, 255)
+stroke.Thickness = 2
+stroke.Transparency = 0.5
+
+-- Position frame off-screen initially (bottom)
+local screenSize = workspace.CurrentCamera.ViewportSize
+G2L["Frame_2"]["Position"] = UDim2.new(0.5, -135, 1, 50)
+
+-- Discord Invite Title
+G2L["DiscordInvite1_3"] = Instance.new("TextLabel", G2L["Frame_2"])
+G2L["DiscordInvite1_3"]["BorderSizePixel"] = 0
+G2L["DiscordInvite1_3"]["TextSize"] = 20
+G2L["DiscordInvite1_3"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["DiscordInvite1_3"]["FontFace"] = Font.new("rbxasset://fonts/families/PressStart2P.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["DiscordInvite1_3"]["TextColor3"] = Color3.fromRGB(195, 52, 255)
+G2L["DiscordInvite1_3"]["BackgroundTransparency"] = 1
+G2L["DiscordInvite1_3"]["Size"] = UDim2.new(1, -20, 0, 30)
+G2L["DiscordInvite1_3"]["Text"] = "Discord Invite"
+G2L["DiscordInvite1_3"]["Name"] = "DiscordInvite1"
+G2L["DiscordInvite1_3"]["Position"] = UDim2.new(0, 10, 0, 5)
+G2L["DiscordInvite1_3"]["TextScaled"] = true
+
+-- Message 1
+G2L["Msg1_4"] = Instance.new("TextLabel", G2L["Frame_2"])
+G2L["Msg1_4"]["BorderSizePixel"] = 0
+G2L["Msg1_4"]["TextSize"] = 12
+G2L["Msg1_4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["Msg1_4"]["FontFace"] = Font.new("rbxasset://fonts/families/PressStart2P.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["Msg1_4"]["TextColor3"] = Color3.fromRGB(188, 0, 255)
+G2L["Msg1_4"]["BackgroundTransparency"] = 1
+G2L["Msg1_4"]["Size"] = UDim2.new(1, -20, 0, 25)
+G2L["Msg1_4"]["Text"] = "Support and help us in this project!"
+G2L["Msg1_4"]["Name"] = "Msg1"
+G2L["Msg1_4"]["Position"] = UDim2.new(0, 10, 0, 35)
+G2L["Msg1_4"]["TextScaled"] = true
+G2L["Msg1_4"]["TextWrapped"] = true
+
+-- Unexpirable invitation text
+G2L["TextLabel_6"] = Instance.new("TextLabel", G2L["Frame_2"])
+G2L["TextLabel_6"]["BorderSizePixel"] = 0
+G2L["TextLabel_6"]["TextSize"] = 10
+G2L["TextLabel_6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["TextLabel_6"]["FontFace"] = Font.new("rbxasset://fonts/families/PressStart2P.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["TextLabel_6"]["TextColor3"] = Color3.fromRGB(0, 150, 255)
+G2L["TextLabel_6"]["BackgroundTransparency"] = 1
+G2L["TextLabel_6"]["Size"] = UDim2.new(1, -20, 0, 20)
+G2L["TextLabel_6"]["Text"] = "(Unexpirable invitation)"
+G2L["TextLabel_6"]["Position"] = UDim2.new(0, 10, 0, 60)
+G2L["TextLabel_6"]["TextScaled"] = true
+
+-- Discord Link
+G2L["Msg2_7"] = Instance.new("TextLabel", G2L["Frame_2"])
+G2L["Msg2_7"]["BorderSizePixel"] = 0
+G2L["Msg2_7"]["TextSize"] = 12
+G2L["Msg2_7"]["BackgroundColor3"] = Color3.fromRGB(20, 20, 20)
+G2L["Msg2_7"]["FontFace"] = Font.new("rbxasset://fonts/families/PressStart2P.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["Msg2_7"]["TextColor3"] = Color3.fromRGB(100, 255, 100)
+G2L["Msg2_7"]["BackgroundTransparency"] = 0.2
+G2L["Msg2_7"]["Size"] = UDim2.new(1, -20, 0, 25)
+G2L["Msg2_7"]["Text"] = "https://discord.gg/THCft35wSF"
+G2L["Msg2_7"]["Name"] = "DiscordLink"
+G2L["Msg2_7"]["Position"] = UDim2.new(0, 10, 0, 85)
+G2L["Msg2_7"]["TextScaled"] = true
+
+-- Add corner to link background
+local linkCorner = Instance.new("UICorner", G2L["Msg2_7"])
+linkCorner.CornerRadius = UDim.new(0, 4)
+
+-- Close Button
+G2L["Close_8"] = Instance.new("TextButton", G2L["Frame_2"])
+G2L["Close_8"]["BorderSizePixel"] = 0
+G2L["Close_8"]["TextSize"] = 18
+G2L["Close_8"]["TextColor3"] = Color3.fromRGB(255, 100, 100)
+G2L["Close_8"]["BackgroundColor3"] = Color3.fromRGB(20, 20, 20)
+G2L["Close_8"]["FontFace"] = Font.new("rbxasset://fonts/families/PressStart2P.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["Close_8"]["BackgroundTransparency"] = 0.2
+G2L["Close_8"]["Size"] = UDim2.new(0, 30, 0, 30)
+G2L["Close_8"]["Text"] = "×"
+G2L["Close_8"]["Name"] = "Close"
+G2L["Close_8"]["Position"] = UDim2.new(1, -35, 0, 5)
+
+-- Add corner to close button
+local closeCorner = Instance.new("UICorner", G2L["Close_8"])
+closeCorner.CornerRadius = UDim.new(0, 15)
+
+-- Animation and functionality variables
+local isDragging = false
+local dragStart = nil
+local startPos = nil
+local animationComplete = false
+
+-- Discord link to copy
+local discordLink = "https://discord.gg/THCft35wSF"
+
+-- Tween info for animations
+local tweenInfo = TweenInfo.new(
+    0.8, -- Duration
+    Enum.EasingStyle.Back, -- Easing Style
+    Enum.EasingDirection.Out, -- Easing Direction
+    0, -- Repeat Count
+    false, -- Reverses
+    0 -- Delay
+)
+
+local closeTweenInfo = TweenInfo.new(
+    0.5,
+    Enum.EasingStyle.Back,
+    Enum.EasingDirection.In,
+    0,
+    false,
+    0
+)
+
+-- Copy to clipboard function
+local function copyToClipboard(text)
+    if setclipboard then
+        setclipboard(text)
+        -- Visual feedback
+        local originalText = G2L["Msg2_7"].Text
+        G2L["Msg2_7"].Text = "COPIED TO CLIPBOARD!"
+        G2L["Msg2_7"].TextColor3 = Color3.fromRGB(100, 255, 100)
+        
+        wait(1.5)
+        G2L["Msg2_7"].Text = originalText
+        G2L["Msg2_7"].TextColor3 = Color3.fromRGB(100, 255, 100)
+    end
+end
+
+-- Dragging functionality
+local function startDrag(input)
+    if not animationComplete then return end
+    
+    isDragging = true
+    dragStart = input.Position
+    startPos = G2L["Frame_2"].Position
+end
+
+local function updateDrag(input)
+    if isDragging then
+        local delta = input.Position - dragStart
+        G2L["Frame_2"].Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end
+
+local function endDrag()
+    isDragging = false
+end
+
+-- Input connections
+G2L["Frame_2"].InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        startDrag(input)
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        updateDrag(input)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        endDrag()
+    end
+end)
+
+-- Close button functionality with animation
+G2L["Close_8"].MouseButton1Click:Connect(function()
+    -- Close animation
+    local closeTween = TweenService:Create(G2L["Frame_2"], closeTweenInfo, {
+        Position = UDim2.new(0.5, -135, 1, 50),
+        Rotation = 15,
+        Size = UDim2.new(0, 0, 0, 0)
+    })
+    
+    -- Fade out animation
+    local fadeTween = TweenService:Create(G2L["Frame_2"], closeTweenInfo, {
+        BackgroundTransparency = 1
+    })
+    
+    -- Fade out all children
+    for _, child in pairs(G2L["Frame_2"]:GetChildren()) do
+        if child:IsA("GuiObject") then
+            TweenService:Create(child, closeTweenInfo, {
+                BackgroundTransparency = 1,
+                TextTransparency = 1
+            }):Play()
+        end
+    end
+    
+    closeTween:Play()
+    fadeTween:Play()
+    
+    closeTween.Completed:Connect(function()
+        G2L["ScreenGui_1"]:Destroy()
+    end)
+end)
+
+-- Close button hover effects
+G2L["Close_8"].MouseEnter:Connect(function()
+    TweenService:Create(G2L["Close_8"], TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(255, 50, 50),
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        Size = UDim2.new(0, 35, 0, 35)
+    }):Play()
+end)
+
+G2L["Close_8"].MouseLeave:Connect(function()
+    TweenService:Create(G2L["Close_8"], TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+        TextColor3 = Color3.fromRGB(255, 100, 100),
+        Size = UDim2.new(0, 30, 0, 30)
+    }):Play()
+end)
+
+-- Entry animation
+spawn(function()
+    wait(0.5) -- Small delay before showing
+    
+    -- Target position (center of screen)
+    local targetPosition = UDim2.new(0.5, -135, 0.5, -72)
+    
+    -- Create the main entrance tween
+    local entranceTween = TweenService:Create(G2L["Frame_2"], tweenInfo, {
+        Position = targetPosition
+    })
+    
+    -- Play entrance animation
+    entranceTween:Play()
+    
+    -- Text animations (staggered)
+    wait(0.3)
+    
+    -- Animate text elements with staggered timing
+    local textElements = {
+        G2L["DiscordInvite1_3"],
+        G2L["Msg1_4"],
+        G2L["TextLabel_6"],
+        G2L["Msg2_7"]
+    }
+    
+    for i, element in ipairs(textElements) do
+        spawn(function()
+            element.TextTransparency = 1
+            wait(i * 0.1)
+            TweenService:Create(element, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                TextTransparency = 0
+            }):Play()
+        end)
+    end
+    
+    entranceTween.Completed:Connect(function()
+        animationComplete = true
+        -- Auto-copy the Discord link
+        spawn(function()
+            wait(1) -- Wait a bit before auto-copying
+            copyToClipboard(discordLink)
+        end)
+    end)
+end)
+
+-- Pulse animation for the Discord link
+spawn(function()
+    while G2L["ScreenGui_1"].Parent do
+        if animationComplete then
+            local pulseTween = TweenService:Create(G2L["Msg2_7"], TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 0.5
+            })
+            local pulseTween2 = TweenService:Create(G2L["Msg2_7"], TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 0.2
+            })
+            
+            pulseTween:Play()
+            pulseTween.Completed:Connect(function()
+                pulseTween2:Play()
+            end)
+            wait(2)
+        else
+            wait(0.1)
+        end
+    end
+end)
+
+return G2L["ScreenGui_1"], require
